@@ -1,0 +1,61 @@
+cloud:
+  aws:
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+server:
+  port: 8218
+  servlet:
+    context-path: /sit
+
+spring:
+  application:
+    name: collector-api-test
+    http:
+      encoding:
+        charset: UTF-8
+        enabled: true
+        force: true
+  datasource:
+    celo:
+      url: jdbc:mysql://int2.celo.db.loyalty.com:3306/cpm?autoConnect=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      username: bBYkvY4KaonoxNr6vfbhQZwr4Ph8nlMrlNNAVtP71pJXpBOQN6U39o+Kltwi/cPeAwCqFoctqFYQSF07552xB6In3b1lrShqSo+0oEsCheIE+4Pe/yy7jxhxtoyN3XpjfSs8SlFJ4Z+oGxyqT8v+WOh+aL0aNs6rN3AzqD1wyIvgL7XNUXUM5TW043GEz6+k67R/KJ0PyYiRdb3UGsBXMJX6aQ6MyL5Y/Iz29cvHlJTTQ6IcR1DMz1IMoJwXMzvDjZo44jG9Bd+pbtd7E1AXqaj4o/oE8RgTBTsFgdISE2nkWJz3kJrKhorh/15jpqSW6HT6vFdlPxZbX6cpOI3E8Q==
+      password: KSjE44H4bdltpLyMGU+XbLJaVdmfnQ323/qEAI+puxlg17BfvcOih31RsfTdamWs2GrnslYF0MBe3CgBgRHfwnZs8MEQFzBeZ9ewbrOnVD+y/gCvvmf7yt8PJAOBfU2S9pkG1XRY6vucRzOrK9ddbvm8AnMxC/R7AUKusf0NBpbm6uYTEHmrEOVcBOGL5qh+s/WXLDnDSdahfo98pC6nPPyHWdrGubwTcPE1g7Idd1TgxMrjWnyJnejil7FPhJS3u0P03iOIkznOdjw/yXXfVH8i+DvCqeD/Fc9LfmK0A1QODEzU3izboKnoEI/Vw4UigvQjTzBAfVg8619pW9puiw==
+
+loyalty:
+  public_certificate: public_key.der
+  private_certificate: private_key.der
+  collector-api:
+    uri: https://int2-collector.celo.services.loyalty.com
+    basic-info-path: /collector/basic-info
+  auth-api-get-token:
+    uri: https://oauth-int.airmiles.ca/oauth/token
+    client_id: hWPmQfW9JbSsRuaWKjjTmfcaWRredV5+/zzsC4kU5PfNSJqhZV+w239qWte/4+vFV71Ysqy0HFRZW9yrJfPVj1oyArMMu8bqjRxyP5pyMo2+wzsUPMNSZs0yJntte6rcBWROL0zRYr2fj1ZUI6vIIsngigp/YH2JI4JJ2DOIVJWGH0ORCXOb9rgIxXes8qsoP+cTxMkM9/mxzpNZUEnBR0sdCG0HExisTp3hMXOMVGxb33XoPTZpSayJzteXcsK/QFlBqpMDUEFHvXuW3NoQ3T8vVR8yDHiFXnbJHJHeW4rXLqRNpni1foPPFhxJpPQwlaChmh7aRe2ToflprQQAEQ==
+    client_secret: Y1/RZ9v62/Fikyt6wAalnZ8WKPrg/+Ce1xj1qmXHva9eDpO9h1kPuG+kuy46Lh8vRIoroVSFq534WpTciKUL9gb5NNY3/1HuGct2TNaTAhleAsbNEjUsnddpySZYpXPxYYxJ8xQ6oNcfpP1tCM+fzNu9Xz3k1GmwCZO6m7MGQlFVBpsqHBP+lBSGQtxUmlH2Xm3+tBAbEyrXcwZTcnZLNeUqmzT7mqJGH0wk0qG17sUY4FL/oPvy7pRf7GHFBz/hwwgsUAJWi4Wt2svQ1SdwG2GkAL9XmjLWxGfLuYO6scoPPB8icRNL04CnKysougL1R7DN8xJcxWChjuCjBznPbQ==
+    audience: machine-to-machine-access
+    client_id_auth0: HaFTqp8GzG29IythEbx5N+tA6OKmRdnc2r1aO5MQfyErDUOlZ1NNSZOn0JwRjbTyozoZuDSf8EUJ2SP1SQw6eUa4h/+QMv71GgFnOyDsykscMAF1LHHreLVT6mbRqFK9Nw6UW//0hFrfOqgGicr1OUoCaG07szBdVdCL9atvDAPOlA53ndOlYSfvfH6YqQpNw885pKnsIyBPFH/gnhdKD89dW8bqROoYIhrNO5VrE7rs5KiKumrqCCPtyaxU1jFAVBWnR9+UB8L80cs/yWp9z63OE7aOyJqydGohAlyUzvPkZbvDQ2VXrlRvvCnS7dYCtDeED14o6V34gjN6IeSVPg==
+    client_secret_auth0: L3iyUFnLK95n4ZitP0LXbSHXemQWfJYyP2yT6DZpNP84Nx3vtXupxmNbzYVqUTAMQL0rqxLFCLr+rozQ1mX6kMP5be/cGw+egWBhikllzbxD76V1CToC5SouUj+Sv9shWQxat9COF8aMo/MGz+b+vwTKJpWhwj8sSJ8LbJEVrdQIR5M6BiPFIMRfc9/P7tO+LnJw/GEuHQp9zh0nrmtN8Cw+S/uQ58tPAoo4u01sc8x7NPZVrje/LjQ40duNTdUxnTLobLwMxUR4hL/O3Z2w5GFLUW3Cq90ABFNUMcH4WBABu+iYhWvDnaWFLKwdZC5a6rAg85/8WHzda6WExtyVqA==
+    audience_auth0: auth0-profile-mgmt-adapter
+  short-info-api:
+    uri: https://int.airmilesapis.ca
+    path: /collector-short-info-api/shortInfo
+  auth-proxy-api:
+    uri: https://int.airmilesapis.ca
+    path: /auth0-idp/users/
+    unlock_path: /auth0-idp/unlock-users/
+  celo-member-soap:
+    protocol: https
+    host: int2.celo.app.loyalty.com
+    path: /CPM/MemberService_AMRP
+
+logging:
+  level:
+    app: INFO
+    org:
+      springframework: DEBUG
+
+management:
+  endpoints:
+    web:
+      base-path: /

@@ -78,6 +78,7 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: slf4j
     compile group: 'ch.qos.logback', name: 'logback-classic', version: logback
 
+    //implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.6'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: appacheCommons
     compile group: 'org.apache.poi', name: 'poi', version: poi
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: httpComponents
@@ -93,9 +94,6 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-configuration-processor')
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-web')
-
-    //implementation name: 'securityservice'
-    //testImplementation name: 'securityservice'
 
     testCompile group: 'junit', name: 'junit', version: junit
     testCompile group: 'org.spockframework', name: 'spock-core', version: spockCore

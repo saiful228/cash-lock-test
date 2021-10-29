@@ -105,4 +105,11 @@ class CeloHelper {
         return getMemberProfileRequest
     }
 
+//    static GetMemberProfileV2Request getDefaultMemberProfileRequest(String cardNumber) {
+//        GetMemberProfileV2Request getMemberProfileRequest = new GetMemberProfileV2Request()
+//        getMemberProfileRequest.setRequestContext(defaultRequestContextType())
+//        getMemberProfileRequest.cardNumber = cardNumber
+//        return getMemberProfileRequest
+//    }
+
 }

@@ -7,6 +7,7 @@ import com.loyalty.ws.cpm.esb.amrp._2._1.member.wsdl.Member
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
+import spock.lang.Shared
 import spock.lang.Specification
 
 @ActiveProfiles("int")
@@ -17,9 +18,18 @@ class BaseSpecification extends Specification{
         true
     }*/
 
+    @Shared
+    Boolean startFlag = true
+
+    @Shared
+    String cardNumber
+
     @Autowired
     CeloRepository repository
 
     @Autowired
     Member memberService
+
+
+
 }

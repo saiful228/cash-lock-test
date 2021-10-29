@@ -1,12 +1,11 @@
 package com.loyalty.avenger.cashlock.components.repository
-
-
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
+
 
 /**
  *
@@ -381,7 +380,7 @@ class CeloRepository {
                 "and io.millage_amt > 50\n" +
                 "and io.millage_type = 580"
 
-        com.loyalty.collector.components.util.TestDataUtils.getRandomRecordFromList(
+        com.loyalty.avenger.cashlock.components.util.TestDataUtils.getRandomRecordFromList(
                 jdbcTemplate.queryForList(query)
         ).getAt("issuer_code").toString()
     }

@@ -1,4 +1,6 @@
 package com.loyalty.avenger.cashlock.components.config
+
+import com.loyalty.avenger.cashlock.components.util.Encryptor
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.jdbc.DataSourceBuilder
@@ -15,7 +17,7 @@ class CeloDb {
     @Lazy
     @Bean(name = "jdbcCelo")
     JdbcTemplate getJdbcTemplate() {
-        return new JdbcTemplate(CeloDataSource())
+        return new JdbcTemplate(celoDataSource())
     }
 
     @Value('${spring.datasource.celo.url}') String url
@@ -24,10 +26,10 @@ class CeloDb {
 
     @Bean(name = "celo")
     @ConfigurationProperties(prefix = "datasource.celo")
-    DataSource CeloDataSource() {
+    DataSource celoDataSource() {
         return DataSourceBuilder.create()
-                .username(com.loyalty.avenger.cashlock.components.util.Encryptor.decrypt(username))
-                .password(com.loyalty.avenger.cashlock.components.util.Encryptor.decrypt(password))
+                .username(Encryptor.decrypt(username))
+                .password(Encryptor.decrypt(password))
                 .url(url)
                 .driverClassName('com.mysql.cj.jdbc.Driver')
                 .build()

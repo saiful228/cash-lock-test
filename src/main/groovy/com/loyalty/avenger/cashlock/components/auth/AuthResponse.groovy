@@ -4,7 +4,6 @@ import com.loyalty.avenger.cashlock.components.util.TestDataUtils
 import groovy.json.JsonSlurper
 import org.apache.http.HttpResponse
 
-
 class AuthResponse {
     HttpResponse httpResponse
     String accessToken

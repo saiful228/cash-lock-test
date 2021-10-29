@@ -1,0 +1,55 @@
+cloud:
+  aws:
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+server:
+  port: 8218
+  servlet:
+    context-path: /sit
+
+spring:
+  application:
+    name: cash-lock
+    http:
+      encoding:
+        charset: UTF-8
+        enabled: true
+        force: true
+  datasource:
+    celo:
+      url: jdbc:mysql://int2.celo.db.loyalty.com:3306/cpm?autoConnect=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      username: i08Hg207RfLqQOBQfL4vLsALg9XYePIANnyXacUz+2M1moaLoBLXjLMT95A+hqG7kokWhDcnsa4/2/DC0EgFmS7JY8EvkVslXUSCqShaKAPBm+iEW4KWu0+m9NhUIfzlzQYCEC5/AsbMfPPKJO8YJ8Fad6LJzTTdNFnCgQdnoUqDBBLSecTcwbZ6/so91e/PyHdATBdZ6qRYyczBw35rYwkoPnQpOA7j1mQGcIh/SrK+zPTggmwHklNrIu5hXmb7knV1WKW/n++SFp/z5YmeUCdaM0Uf3Y5380Uhcd6NlIht1nMf4MYENQrqseIIb1+9dYGeyFm/IsGFD0XK1yrjWQ==
+      password: DcrTDRHAhjJmEZA2q0TlSM2/mJwnbxEv5WJ2TLXQ1mkZiEfW7nRC3xyATH/oBU6ja1DtDKeS4uFOyALxShIWtG37D5IyzpC4bFOadf5mBm/0ETffu1wc2/nFWImG9uKKLDKrnUsNvZ5gpj4dKwgYUwyqGXPVBf6aBdRpth6CA+IVLN7itxQyspHRTp+saw5QPzLwfcPAz0zD2bCBEJTrGHNdOq+UqnlSeNn5Xgol8t8M1wop/cQDTk1cnEMA0qsjMONW0hG1BV9zMeUv2SCiTrK7OEtSyOFHOjiu5pc0wQGZvGsKEESPqAesxAifdxyO1V0upRAj5nNf78pxbi8lVg==
+loyalty:
+  public_certificate: public_key.der
+  private_certificate: private_key.der
+  auth-api:
+    uri: https://oauth-int.airmiles.ca/oauth/token
+    client_id: fcFBHZVViMCEnb74yzsQaMdtRZOXdAWYTRY6gFYLFyx+eXD3OF+cVgUQF0L4o4d77ZE21re/E2O/Nqtq71IChG7FOwCTif3X8mXJdBCtwgB5BcHzJGiFR/uilJeL+2QiIVabmgXL83QBTemUP1bOyoZ9vvcwJN6+kZMJVF/YoxrNd2rfBQK0qNY1LT5w/c15eej2Fgc1rOEqRfAVS8xJbn5pzyN+RtYKsje8tT5xwpfGaLh8ktwNZlY2/PF/4uZ+YwBCxdgyliDfDqQq+jUPJ8wSrs5wq29g1lD1HMn4pmnD+QqetPPCgMvAY8D5AK5JBNEJARnfjCL8KFeuzwmddg==
+    client_secret: kFc8rkv1hJMYM/pgwGvImSsf8XtuvQwSl7pg79sg22R78D1T04Nb+UziGXbw9GBfm0O7y2sZt/BMxvq8ClJmzBvJAaJ9CtugPCCViRkl32ZMMY51tOspK4YvefGpbzNYqRVsENfkMZ5XsXQRVwxarX8eFSY6fj7GbljytjmzlWhhFVegR7U2WMEbFRdYbIWWSiPwgcQMpmtQIiZKC1yCNd/fTuj34f+Jsz9pkeUY5CoizV3LY5NoejVWVMGa+X66/qsvzm1bMdpxXXCOOT0LBq3brZ6Rk1/jxH0LvoMhvHU2zpUpzVzZ65nWZPEdOIKURi4waWrQw5cvQKXQGcRIQQ==
+    audience: "https://members.loyalty.com"
+    grant_type: "password"
+  cashlock-api:
+    uri: https://int.airmilesapis.ca
+    path: /member-preference/cash-lock
+  auth-proxy-api:
+    uri: https://int.airmilesapis.ca
+    path: /auth0-idp/users/
+    unlock_path: /auth0-idp/unlock-users/
+  celo-member-soap:
+    protocol: https
+    host: int2.celo.app.loyalty.com
+    path: /CPM/MemberService_AMRP
+
+logging:
+  level:
+    app: INFO
+    org:
+      springframework: DEBUG
+
+management:
+  endpoints:
+    web:
+      base-path: /

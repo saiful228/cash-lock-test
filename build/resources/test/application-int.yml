@@ -34,10 +34,7 @@ loyalty:
   cashlock-api:
     uri: https://int.airmilesapis.ca
     path: /member-preference/cash-lock
-  auth-proxy-api:
-    uri: https://int.airmilesapis.ca
-    path: /auth0-idp/users/
-    unlock_path: /auth0-idp/unlock-users/
+    put_request: /member-preference/cash-lock
   celo-member-soap:
     protocol: https
     host: int2.celo.app.loyalty.com

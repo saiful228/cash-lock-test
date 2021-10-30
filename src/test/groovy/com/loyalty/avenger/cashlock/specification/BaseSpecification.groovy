@@ -13,10 +13,8 @@ import spock.lang.Specification
 @ActiveProfiles("int")
 @SpringBootTest(classes = TestApplication)
 class BaseSpecification extends Specification{
-    /*def "first try"(){
-        expect: "True"
-        true
-    }*/
+
+
 
     @Shared
     Boolean startFlag = true
@@ -30,6 +28,12 @@ class BaseSpecification extends Specification{
     @Autowired
     Member memberService
 
+    def createAuth0EmailDBRecord() {
+        String createToken = getTokenClient.getCreateToken().accessToken
+        Logger.logMessage("Auth0 Create Token: $createToken")
+        createDataClient.generateNewTestDataSet(createToken, enrollMemberResponse.getResponseContext().cardNumber, enrollMemberRequest.getContactDetails().getEmail())
+        Logger.logMessage(createDataClient.currentRequest.toString())
+    }
 
 
 }

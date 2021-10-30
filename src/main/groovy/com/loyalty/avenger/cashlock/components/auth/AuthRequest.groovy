@@ -20,7 +20,7 @@ class AuthRequest {
     String password
     String clientSecret
     String channel = Channel.WEB.getValue()
-    String realm
+
 
     @Override
     String toString() {
@@ -41,9 +41,7 @@ class AuthRequest {
                 password     : password,
                 client_secret: clientSecret
         ]
-        if (realm!= null && realm.length() > 0) {
-            bodyMap["realm"] = realm
-        }
+
         bodyMap
     }
 
@@ -57,9 +55,8 @@ class AuthRequest {
         form.add(new BasicNameValuePair("password", password))
         UrlEncodedFormEntity entity = new UrlEncodedFormEntity(form, StandardCharsets.UTF_8)
 
-        if (realm!= null && realm.length() > 0) {
-            form.add(new BasicNameValuePair("realm", realm))
-        }
+
+
 
         HttpPost request = new HttpPost(uri)
         request.addHeader(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded")

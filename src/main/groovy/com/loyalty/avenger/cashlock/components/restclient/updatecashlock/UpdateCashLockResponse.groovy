@@ -1,11 +1,11 @@
-package com.loyalty.avenger.cashlock.components.restclient.getcashlock
+package com.loyalty.avenger.cashlock.components.restclient.updatecashlock
 
 import com.loyalty.avenger.cashlock.components.util.TestDataUtils
 import groovy.json.JsonSlurper
 import org.apache.http.HttpResponse
 import org.apache.http.HttpStatus
 
-class GetCashLockRespponse {
+class UpdateCashLockResponse {
 
     Boolean cashRedemptionLocked
 

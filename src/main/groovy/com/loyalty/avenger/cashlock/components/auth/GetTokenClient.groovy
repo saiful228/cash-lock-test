@@ -32,12 +32,14 @@ class GetTokenClient implements BaseHttpClient {
         authResponse
     }
 
-    AuthResponse getAccessToken() {
+    AuthResponse getAccessToken(String userName, String password) {
         AuthRequest request = new AuthRequest()
         request.clientId = Encryptor.decrypt(clientIdConfig)
         request.clientSecret = Encryptor.decrypt(clientSecretConfig)
         request.audience = clientAudienceConfig
         request.grantType = GrantType.CLIENT_CREDENTIALS.getValue()
+        request.userName = userName
+        request.password = password
         sendRequest(request)
     }
 

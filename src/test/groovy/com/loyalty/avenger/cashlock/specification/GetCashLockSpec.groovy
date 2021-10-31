@@ -1,7 +1,7 @@
 package com.loyalty.avenger.cashlock.specification
 
 
-
+import com.loyalty.avenger.cashlock.components.constant.Constants
 import com.loyalty.avenger.cashlock.components.auth.GetTokenClient
 import com.loyalty.avenger.cashlock.components.helper.CeloHelper
 import com.loyalty.avenger.cashlock.components.constant.CollectorStatus
@@ -33,7 +33,7 @@ class GetCashLockSpec extends BaseSpecification {
     //@Shared
     //String auth0Token
 
-   /* def setup() {
+    /* def setup() {
         if( startFlag == true) {
             accessToken = getTokenClient.getAccessToken().accessToken
             //auth0Token = getTokenClient.getAuth0Token().accessToken
@@ -44,22 +44,23 @@ class GetCashLockSpec extends BaseSpecification {
 */
 
 
-    def "TC-1. Valid random short info request for active collector should return 200 Ok status with current collector information." (){
+    def "TC-1. Valid random cash lock request for active collector should return 200 Ok status with current collector information."() {
+
         given: "Valid active collector number is provided"
         //String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
         //println cardNumber
         and: "Expected current collector information is retrieved"
         String accessToken = getTokenClient.getAccessToken("80000009950", "1111").accessToken
         println accessToken
-
-        UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest(true, accessToken)
+        String token = "Bearer "+accessToken
+        println token
+        UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest(true, token)
         println response.toString()
-
 
 
         //80000009950, 1111
 //        when: "Basic info request is sent to collector api using this card number."
-//        ShortInfoResponse response = shortInfoClient.sendShortInfoRequest(cardNumber, accessToken)
+//        ShortInfoResponse response = shortInfoClient.sendShortInfoRequest(cardNumber,  accessToken)
 //        then: "Response contains 200 OK status"
 //        ShortInfoApiValidator.validateNumericValues(response.status, HttpStatus.SC_OK, "Response status")
 //        and: "Actual short info response values match expected values for this collector"
@@ -68,15 +69,18 @@ class GetCashLockSpec extends BaseSpecification {
 //        ShortInfoApiValidator.validateAuth0Info(response, expectedAuth0Info)
     }
 
-
+//    String getRandomActiveCollector(String securityPin = Constants.DEFAULT_SECRET_PIN) {
+//        String cardNumber
+//        for (int i =0; i <=20; i++) {
+//            cardNumber = TestDataUtils.(
+//                    repository.getRandomActiveIssuer())
+//            if(createSecretPin(cardNumber, securityPin)) {
+//                this.cardNumber = cardNumber
+//                break
+//            }
+//        }
+//        Logger.logMessage("Victim Card Number: $cardNumber")
+//        cardNumber
+//    }
 
 }
-
-
-
-
-
-
-
-
-

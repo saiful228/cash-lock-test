@@ -10,6 +10,18 @@ import org.springframework.test.context.ActiveProfiles
 import spock.lang.Shared
 import spock.lang.Specification
 
+
+
+import java.math.BigInteger;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+
+
+
 @ActiveProfiles("int")
 @SpringBootTest(classes = TestApplication)
 class BaseSpecification extends Specification{
@@ -28,12 +40,12 @@ class BaseSpecification extends Specification{
     @Autowired
     Member memberService
 
-    def createAuth0EmailDBRecord() {
-        String createToken = getTokenClient.getCreateToken().accessToken
-        Logger.logMessage("Auth0 Create Token: $createToken")
-        createDataClient.generateNewTestDataSet(createToken, enrollMemberResponse.getResponseContext().cardNumber, enrollMemberRequest.getContactDetails().getEmail())
-        Logger.logMessage(createDataClient.currentRequest.toString())
-    }
+//    def createAuth0EmailDBRecord() {
+//        String createToken = getTokenClient.getCreateToken().accessToken
+//        Logger.logMessage("Auth0 Create Token: $createToken")
+//        createDataClient.generateNewTestDataSet(createToken, enrollMemberResponse.getResponseContext().cardNumber, enrollMemberRequest.getContactDetails().getEmail())
+//        Logger.logMessage(createDataClient.currentRequest.toString())
+//    }
 
 
 }

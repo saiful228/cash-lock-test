@@ -10,7 +10,7 @@ import com.loyalty.avenger.cashlock.components.util.TestDataUtils
 
 class UpdateCashLockRequest {
 
-    boolean status
+   boolean cashRedemptionLocked
     String token
 
     @Override
@@ -24,7 +24,7 @@ class UpdateCashLockRequest {
 
     Map getBodyMap () {
         Map bodyMap = [
-                cashRedemptionLocked: status
+                cashRedemptionLocked: cashRedemptionLocked
         ]
         bodyMap
     }

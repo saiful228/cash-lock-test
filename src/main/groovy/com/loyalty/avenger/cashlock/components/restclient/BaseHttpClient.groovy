@@ -4,6 +4,7 @@ import org.apache.http.HttpResponse
 import org.apache.http.client.HttpClient
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.client.methods.HttpPost
+import org.apache.http.client.methods.HttpPut
 import org.apache.http.conn.ssl.NoopHostnameVerifier
 import org.apache.http.impl.client.HttpClientBuilder
 
@@ -39,6 +40,14 @@ trait BaseHttpClient {
     }
 
     HttpResponse sendBasicHttpRequest(HttpGet request){
+        HttpClient client = HttpClientBuilder.create()
+                .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+                .build()
+        httpResponse = client.execute(request)
+        httpResponse
+    }
+
+    HttpResponse sendBasicPutRequest(HttpPut request){
         HttpClient client = HttpClientBuilder.create()
                 .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
                 .build()

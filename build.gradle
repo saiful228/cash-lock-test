@@ -88,12 +88,22 @@ dependencies {
     compile group: 'com.zaxxer', name: 'HikariCP', version: zaxxerHikariCP
     compile group: 'mysql', name: 'mysql-connector-java', version: mySQLConnector
 
+    compile group: 'javax.mail', name: 'mail', version: javaxMail
+    compile group: 'com.microsoft.ews-java-api', name: 'ews-java-api', version: ewsJava
+
+    // JWT Token
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
     // Member SOAP Service Client
     compile "com.loyalty:member-service-library:${loylatyMemebrServiceClient}"
 
     implementation('org.springframework.boot:spring-boot-configuration-processor')
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-web')
+
+    implementation name: 'securityservice'
+    testImplementation name: 'securityservice'
+
 
     testCompile group: 'junit', name: 'junit', version: junit
     testCompile group: 'org.spockframework', name: 'spock-core', version: spockCore

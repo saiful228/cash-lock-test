@@ -1,8 +1,6 @@
 package com.loyalty.avenger.cashlock.components.restclient.getcashlock
 
 import com.loyalty.avenger.cashlock.components.restclient.BaseHttpClient
-import com.loyalty.avenger.cashlock.components.restclient.getcashlock.GetCashLockRespponse
-
 import com.loyalty.avenger.cashlock.components.util.Logger
 import org.apache.http.HttpResponse
 import org.apache.http.client.methods.HttpGet
@@ -18,14 +16,16 @@ class GetCashLockClient implements BaseHttpClient {
     @Value ('${loyalty.cashlock-api.path}')
     String pathConfig
 
-    GetCashLockRespponse getCashLock(String token) {
+    String token
+
+    GetCashLockResponse getCashLock(String token) {
         GetCashLockRequest request = new GetCashLockRequest()
         request.token = token
         sendRequest(request)
     }
 
-    GetCashLockRespponse sendRequest(GetCashLockRequest request) {
-        GetCashLockRespponse response = new GetCashLockRespponse()
+    GetCashLockResponse sendRequest(GetCashLockRequest request) {
+        GetCashLockResponse response = new GetCashLockResponse()
         response.setHttpResponse(send(request))
         response
     }

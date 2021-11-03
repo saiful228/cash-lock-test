@@ -1,6 +1,6 @@
 package com.loyalty.avenger.cashlock.components.auth
 
-import com.loyalty.avenger.cashlock.components.constant.Channel
+import com.loyalty.avenger.cashlock.components.constant.Channels
 import com.loyalty.avenger.cashlock.components.util.TestDataUtils
 import org.apache.http.HttpHeaders
 import org.apache.http.NameValuePair
@@ -19,7 +19,7 @@ class AuthRequest {
     String userName
     String password
     String clientSecret
-    String channel = Channel.WEB.getValue()
+    String channel = Channels.WEB.getValue()
 
 
     @Override

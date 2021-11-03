@@ -1,5 +1,5 @@
 package com.loyalty.avenger.cashlock.components.helper
-import com.loyalty.avenger.cashlock.components.constant.Channel
+import com.loyalty.avenger.cashlock.components.constant.Channels
 import com.loyalty.avenger.cashlock.components.util.TestDataUtils
 import com.loyalty.ws.cpm.esb.amrp._2._1.common.RequestContextType
 import com.loyalty.ws.cpm.esb.amrp._2._1.member.*
@@ -49,7 +49,7 @@ class CeloHelper {
     //Default Request Context Header
     static RequestContextType getDefaultRequestContextType() {
         RequestContextType context = new RequestContextType()
-        context.setChannel Channel.WEB.getValue()
+        context.setChannel Channels.WEB.getValue()
         context.setSource 'INVEMLCAMP'
         context.setLocale ''
         context.setUser 'ONLINEUSER'
@@ -89,7 +89,7 @@ class CeloHelper {
         contactDetailsType
     }
 
-    static UpdateMemberProfileRequest getEmailUpdateSOAPRequest(String cardNumber, String email, String channel = Channel.WEB.getValue()) {
+    static UpdateMemberProfileRequest getEmailUpdateSOAPRequest(String cardNumber, String email, String channel = Channels.WEB.getValue()) {
         UpdateMemberProfileRequest request = new UpdateMemberProfileRequest()
         request.requestContext = getDefaultRequestContextType()
         request.getRequestContext().channel = channel
@@ -111,5 +111,16 @@ class CeloHelper {
 //        getMemberProfileRequest.cardNumber = cardNumber
 //        return getMemberProfileRequest
 //    }
+
+    static UpdateMemberProfileRequest getDefaultUpdateMemberRequest(String cardNumber)  {
+        UpdateMemberProfileRequest updateMemberProfileRequest = new UpdateMemberProfileRequest()
+        updateMemberProfileRequest.setRequestContext(getDefaultRequestContextType())
+        MemberIdentifierType memberIdentifierType = new MemberIdentifierType()
+        memberIdentifierType.setCardNumber(cardNumber)
+        updateMemberProfileRequest.setMemberIdentifier(memberIdentifierType)
+        UpdatePreferenceDetailsType preferenceDetails = new UpdatePreferenceDetailsType()
+        updateMemberProfileRequest.setPreferenceDetails(preferenceDetails)
+        updateMemberProfileRequest
+    }
 
 }

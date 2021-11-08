@@ -62,6 +62,12 @@ class BaseSpecification extends Specification {
             Logger.logError("Error while cleaning up email::"+e.getMessage())
         }
     }
+    String createAuth0PinDBRecord(String newPin = TestDataUtils.getRandomStringNumber(4)) {
+        createSecretPin(enrollMemberResponse.getResponseContext().cardNumber, newPin)
+        String pinToken = getTokenClient.getAccessToken().getAccessToken()
+        Logger.logMessage("Auth0 Manager Token: $pinToken")
+        pinToken
+    }
 
     Boolean createSecretPin(String cardNumber, String secretPin) {
         Boolean result = true

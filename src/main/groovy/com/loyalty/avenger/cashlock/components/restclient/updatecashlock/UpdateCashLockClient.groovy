@@ -20,9 +20,11 @@ class UpdateCashLockClient implements BaseHttpClient{
 
 
 
-    UpdateCashLockResponse sendUpdateCashLockRequest(boolean cashRedemptionLocked, String token) {
-        UpdateCashLockRequest request = new UpdateCashLockRequest(cashRedemptionLocked: cashRedemptionLocked)
+    UpdateCashLockResponse sendUpdateCashLockRequest(String cashRedemptionLocked, String token) {
+        UpdateCashLockRequest request = new UpdateCashLockRequest(cashRedemptionLocked : cashRedemptionLocked)
         this.token = token
+        //this.token = "Bearer "+token
+        println("ssssssss" + token)
         Logger.logMessage("Access token: $token")
         sendRequest(request)
     }
@@ -36,10 +38,12 @@ class UpdateCashLockClient implements BaseHttpClient{
 
     HttpResponse send(UpdateCashLockRequest request) {
         String fullUri = uriConfig + pathConfig
-        HttpPut httpRequest = request.sendPutRequest(fullUri)
+        HttpPut httpRequest = request.sendPutRequest(fullUri, token)
         Logger.logHttpRequest(httpRequest)
         sendBasicPutRequest(httpRequest)
     }
+
+
 }
 
 

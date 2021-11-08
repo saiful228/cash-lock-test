@@ -19,7 +19,7 @@ class AuthRequest {
     String userName
     String password
     String clientSecret
-    String channel = Channels.WEB.getValue()
+    String channel
 
 
     @Override
@@ -39,7 +39,8 @@ class AuthRequest {
                 audience     : audience,
                 username     : userName,
                 password     : password,
-                client_secret: clientSecret
+                client_secret: clientSecret,
+                channel      : channel
         ]
 
         bodyMap
@@ -53,6 +54,7 @@ class AuthRequest {
         form.add(new BasicNameValuePair("client_secret", clientSecret))
         form.add(new BasicNameValuePair("username", userName))
         form.add(new BasicNameValuePair("password", password))
+        form.add(new BasicNameValuePair("channel", channel))
         UrlEncodedFormEntity entity = new UrlEncodedFormEntity(form, StandardCharsets.UTF_8)
 
 

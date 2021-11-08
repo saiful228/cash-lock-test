@@ -32,7 +32,7 @@ class GetTokenClient implements BaseHttpClient {
         authResponse
     }
 
-    AuthResponse getAccessToken(String userName, String password) {
+    AuthResponse getAccessToken(String userName, String password, String channel) {
         AuthRequest request = new AuthRequest()
         request.clientId = Encryptor.decrypt(clientIdConfig)
         request.clientSecret = Encryptor.decrypt(clientSecretConfig)
@@ -40,6 +40,7 @@ class GetTokenClient implements BaseHttpClient {
         request.grantType = GrantType.CLIENT_CREDENTIALS.getValue()
         request.userName = userName
         request.password = password
+        request.channel = channel
         sendRequest(request)
     }
 

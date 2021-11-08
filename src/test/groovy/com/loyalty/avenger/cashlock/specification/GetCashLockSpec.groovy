@@ -1,6 +1,6 @@
 package com.loyalty.avenger.cashlock.specification
 
-
+import com.loyalty.avenger.cashlock.components.constant.Channels
 import com.loyalty.avenger.cashlock.components.constant.Constants
 import com.loyalty.avenger.cashlock.components.auth.GetTokenClient
 import com.loyalty.avenger.cashlock.components.helper.CeloHelper
@@ -53,16 +53,28 @@ class GetCashLockSpec extends BaseSpecification {
         String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
         //println cardNumber
         and: "Expected current collector information is retrieved"
-        //String accessToken = getTokenClient.getAccessToken("80000009950", "1111").accessToken
+
         //println accessToken
-        //String token = "Bearer "+accessToken
+
         println cardNumber
-        //UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest(true, token)
-        //println response.toString()
+
+        createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
+
+        String accessToken = getTokenClient.getAccessToken(cardNumber,Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
+        /*If accesstoken = null make or repeat line 63, retry get-access token  */
+        println(accessToken)
+        //String token = "Bearer "+accessToken
+        UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("true", accessToken)
+        println response.responseBody
+        println(response.statusCode)
+
+        GetCashLockResponse getCashLockResponse =getCashLockClient.getCashLock(accessToken)
+
+        println(getCashLockResponse.responseBody)
+        println(getCashLockResponse.statusCode)
 
 
-
-//    String getRandomActiveCollector(String securityPin = Constants.DEFAULT_SECRET_PIN) {
+//        String getRandomActiveCollector(String securityPin = Constants.DEFAULT_SECRET_PIN) {
 //        String cardNumber
 //        for (int i =0; i <=20; i++) {
 //            cardNumber = TestDataUtils.(
@@ -74,6 +86,7 @@ class GetCashLockSpec extends BaseSpecification {
 //        }
 //        Logger.logMessage("Victim Card Number: $cardNumber")
 //        cardNumber
-   }
+//   }
 
     }
+}

@@ -47,31 +47,180 @@ class GetCashLockSpec extends BaseSpecification {
 //    }
 
 
-    def "TC-1. Valid random cash lock request for active collector should return 200 Ok status with current collector information."() {
+    def "TC-1. When collector lock their redemption from  mobile (cash redemption = true) then collector is not able to redeem points from their account ."() {
 
         given: "Valid active collector number is provided"
         String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
-        //println cardNumber
-        and: "Expected current collector information is retrieved"
 
-        //println accessToken
-
-        println cardNumber
-
+        and: "Expected current collector information is retrieved and create pin for that collector "
         createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
 
-        String accessToken = getTokenClient.getAccessToken(cardNumber,Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
+        and: "Expected Auth0 information for this collector is retrieved from the expected channel "
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.MOBILE.getValue()).accessToken
         /*If accesstoken = null make or repeat line 63, retry get-access token  */
-        println(accessToken)
+        //println(accessToken)
         //String token = "Bearer "+accessToken
+
+        when: "update the customer preference to lock ( cash redeption: locked) "
         UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("true", accessToken)
-        println response.responseBody
-        println(response.statusCode)
+        and: "Response returns Http status 200 Ok"
+        response.getStatusCode() == HttpStatus.SC_OK
+        //println response.responseBody
+        //println(response.statusCode)
+        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        GetCashLockResponse getCashLockResponse = getCashLockClient.getCashLock(accessToken)
+        and:
+        and: "Response returns Http status 200 Ok"
+        getCashLockResponse.getStatusCode() == HttpStatus.SC_OK
+        and: "actual cash redemption request matches expected cash redemption "
 
-        GetCashLockResponse getCashLockResponse =getCashLockClient.getCashLock(accessToken)
+    }
 
-        println(getCashLockResponse.responseBody)
-        println(getCashLockResponse.statusCode)
+    def  "TC-2. When collector unlock their redemption from  mobile (cash redemption = false) then collector is  able to redeem points from their account ."() {
+
+        given: "Valid active collector number is provided"
+        String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
+
+        and: "Expected current collector information is retrieved and create pin for that collector "
+        createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
+
+        and: "Expected Auth0 information for this collector is retrieved from the expected channel "
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.MOBILE.getValue()).accessToken
+        /*If accesstoken = null make or repeat line 63, retry get-access token  */
+        //println(accessToken)
+        //String token = "Bearer "+accessToken
+
+        when: "update the customer preference to lock ( cash redeption: locked) "
+        UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("false", accessToken)
+        and: "Response returns Http status 200 Ok"
+        response.getStatusCode() == HttpStatus.SC_OK
+        //println response.responseBody
+        //println(response.statusCode)
+        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        GetCashLockResponse getCashLockResponse = getCashLockClient.getCashLock(accessToken)
+        and:
+        and: "Response returns Http status 200 Ok"
+        getCashLockResponse.getStatusCode() == HttpStatus.SC_OK
+        and: "actual cash redemption request matches expected cash redemption "
+
+    }
+
+    def "TC-3. When collector lock their redemption from  WEB (cash redemption = true) then collector is not able to redeem points from their account ."() {
+
+        given: "Valid active collector number is provided"
+        String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
+
+        and: "Expected current collector information is retrieved and create pin for that collector "
+        createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
+
+        and: "Expected Auth0 information for this collector is retrieved from the expected channel "
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
+        /*If accesstoken = null make or repeat line 63, retry get-access token  */
+        //println(accessToken)
+        //String token = "Bearer "+accessToken
+
+        when: "update the customer preference to lock ( cash redeption: locked) "
+        UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("true", accessToken)
+        and: "Response returns Http status 200 Ok"
+        response.getStatusCode() == HttpStatus.SC_OK
+        //println response.responseBody
+        //println(response.statusCode)
+        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        GetCashLockResponse getCashLockResponse = getCashLockClient.getCashLock(accessToken)
+        and:
+        and: "Response returns Http status 200 Ok"
+        getCashLockResponse.getStatusCode() == HttpStatus.SC_OK
+        and: "actual cash redemption request matches expected cash redemption "
+
+    }
+    def "TC-4. When collector unlock their redemption from  WEB (cash redemption = false) then collector is  able to redeem points from their account ."() {
+
+        given: "Valid active collector number is provided"
+        String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
+
+        and: "Expected current collector information is retrieved and create pin for that collector "
+        createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
+
+        and: "Expected Auth0 information for this collector is retrieved from the expected channel "
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
+        /*If accesstoken = null make or repeat line 63, retry get-access token  */
+        //println(accessToken)
+        //String token = "Bearer "+accessToken
+
+        when: "update the customer preference to lock ( cash redeption: locked) "
+        UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("false", accessToken)
+        and: "Response returns Http status 200 Ok"
+        response.getStatusCode() == HttpStatus.SC_OK
+        //println response.responseBody
+        //println(response.statusCode)
+        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        GetCashLockResponse getCashLockResponse = getCashLockClient.getCashLock(accessToken)
+        and:
+        and: "Response returns Http status 200 Ok"
+        getCashLockResponse.getStatusCode() == HttpStatus.SC_OK
+        and: "actual cash redemption request matches expected cash redemption "
+
+    }
+    def "TC-5. When collector lock their redemption from Celo Green (GRSC) (cash redemption = true) then collector is not able to redeem points from their account ."() {
+
+        given: "Valid active collector number is provided"
+        String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
+
+        and: "Expected current collector information is retrieved and create pin for that collector "
+        createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
+
+        and: "Expected Auth0 information for this collector is retrieved from the expected channel "
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.CELO_GREEN.getValue()).accessToken
+        /*If accesstoken = null make or repeat line 63, retry get-access token  */
+        //println(accessToken)
+        //String token = "Bearer "+accessToken
+
+        when: "update the customer preference to lock ( cash redeption: locked) "
+        UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("true", accessToken)
+        and: "Response returns Http status 200 Ok"
+        response.getStatusCode() == HttpStatus.SC_OK
+        //println response.responseBody
+        //println(response.statusCode)
+        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        GetCashLockResponse getCashLockResponse = getCashLockClient.getCashLock(accessToken)
+        and:
+        and: "Response returns Http status 200 Ok"
+        getCashLockResponse.getStatusCode() == HttpStatus.SC_OK
+        and: "actual cash redemption request matches expected cash redemption "
+
+    }
+    def "TC-6. When collector unlock their redemption from  mobile (cash redemption = false) then collector is able to redeem points from their account ."() {
+
+        given: "Valid active collector number is provided"
+        String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
+
+        and: "Expected current collector information is retrieved and create pin for that collector "
+        createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
+
+        and: "Expected Auth0 information for this collector is retrieved from the expected channel "
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.CELO_GREEN.getValue()).accessToken
+        /*If accesstoken = null make or repeat line 63, retry get-access token  */
+        //println(accessToken)
+        //String token = "Bearer "+accessToken
+
+        when: "update the customer preference to lock ( cash redeption: locked) "
+        UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("false", accessToken)
+        and: "Response returns Http status 200 Ok"
+        response.getStatusCode() == HttpStatus.SC_OK
+        //println response.responseBody
+        //println(response.statusCode)
+        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        GetCashLockResponse getCashLockResponse = getCashLockClient.getCashLock(accessToken)
+        and:
+        and: "Response returns Http status 200 Ok"
+        getCashLockResponse.getStatusCode() == HttpStatus.SC_OK
+        and: "actual cash redemption request matches expected cash redemption "
+
+    }
+
+
+            //println(getCashLockResponse.responseBody)
+        //println(getCashLockResponse.statusCode)
 
 
 //        String getRandomActiveCollector(String securityPin = Constants.DEFAULT_SECRET_PIN) {
@@ -89,4 +238,3 @@ class GetCashLockSpec extends BaseSpecification {
 //   }
 
     }
-}

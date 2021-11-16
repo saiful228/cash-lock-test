@@ -24,7 +24,7 @@ class UpdateCashLockClient implements BaseHttpClient{
         UpdateCashLockRequest request = new UpdateCashLockRequest(cashRedemptionLocked : cashRedemptionLocked)
         this.token = token
         //this.token = "Bearer "+token
-        println("ssssssss" + token)
+        //println("" + token)
         Logger.logMessage("Access token: $token")
         sendRequest(request)
     }

@@ -3,6 +3,7 @@ package com.loyalty.avenger.cashlock.components.restclient.getcashlock
 import com.loyalty.avenger.cashlock.components.util.TestDataUtils
 import org.apache.http.HttpHeaders
 import org.apache.http.client.methods.HttpGet
+import org.apache.http.entity.StringEntity
 
 class GetCashLockRequest {
 

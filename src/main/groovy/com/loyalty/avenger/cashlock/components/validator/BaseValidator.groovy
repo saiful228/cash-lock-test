@@ -1,6 +1,7 @@
 package com.loyalty.avenger.cashlock.components.validator
 
 import com.loyalty.avenger.cashlock.components.util.Logger
+import org.junit.Assert
 
 
 class BaseValidator {
@@ -21,6 +22,16 @@ class BaseValidator {
         Logger.logValidationValues(actual.toString(), expected.toString(), fieldName)
         if( actual!=expected ) {
             Logger.logEventValidationError(fieldName, expected.toString(), actual.toString())
+            result = false
+        }
+        result
+    }
+
+    static boolean validateKeyValueNotNull(def actual, String fieldName) {
+        boolean result = true
+        Logger.logValidationValues(actual.toString(), fieldName)
+        if( Assert.assertNull(actual)) {
+            Logger.logEventValidationError(fieldName, actual.toString())
             result = false
         }
         result

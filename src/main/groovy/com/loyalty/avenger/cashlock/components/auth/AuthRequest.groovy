@@ -1,6 +1,5 @@
 package com.loyalty.avenger.cashlock.components.auth
 
-import com.loyalty.avenger.cashlock.components.constant.Channels
 import com.loyalty.avenger.cashlock.components.util.TestDataUtils
 import org.apache.http.HttpHeaders
 import org.apache.http.NameValuePair

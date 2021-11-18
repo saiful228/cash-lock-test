@@ -3,26 +3,17 @@ package com.loyalty.avenger.cashlock.specification
 import com.loyalty.avenger.cashlock.components.constant.Channels
 import com.loyalty.avenger.cashlock.components.constant.Constants
 import com.loyalty.avenger.cashlock.components.auth.GetTokenClient
-import com.loyalty.avenger.cashlock.components.helper.CeloHelper
-import com.loyalty.avenger.cashlock.components.constant.CollectorStatus
 import com.loyalty.avenger.cashlock.components.constant.MembershipStatus
 import com.loyalty.avenger.cashlock.components.repository.CeloRepository
 import com.loyalty.avenger.cashlock.components.restclient.getcashlock.GetCashLockClient
-import com.loyalty.avenger.cashlock.components.restclient.getcashlock.GetCashLockRequest
 import com.loyalty.avenger.cashlock.components.restclient.getcashlock.GetCashLockResponse
 import com.loyalty.avenger.cashlock.components.restclient.updatecashlock.UpdateCashLockClient
-import com.loyalty.avenger.cashlock.components.restclient.updatecashlock.UpdateCashLockRequest
 import com.loyalty.avenger.cashlock.components.restclient.updatecashlock.UpdateCashLockResponse
-import com.loyalty.avenger.cashlock.components.util.Logger
 import com.loyalty.avenger.cashlock.components.util.TestDataUtils
-import com.loyalty.avenger.cashlock.components.validator.BaseValidator
 import com.loyalty.avenger.cashlock.components.validator.CashLockValidator
-import com.loyalty.ws.cpm.esb.amrp._2._1.member.types.GetMemberProfileV2Response
 import com.loyalty.ws.cpm.esb.amrp._2._1.member.wsdl.Member
 import org.apache.http.HttpStatus
-import org.junit.Assert
 import org.springframework.beans.factory.annotation.Autowired
-import org.testng.annotations.Test
 import spock.lang.Shared
 
 

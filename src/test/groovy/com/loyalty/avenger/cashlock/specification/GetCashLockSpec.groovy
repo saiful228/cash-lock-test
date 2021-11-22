@@ -32,7 +32,7 @@ class GetCashLockSpec extends BaseSpecification {
     String accessToken
 
 
-    def "TC-1. When collector lock their redemption from  mobile (cash redemption = true) then collector is not able to redeem points from their account ."() {
+    def "TC-1. When collector lock their redemption from  mobile (channel=  (cash redemption = true )then the collector  is not able to redeem points from their account ."() {
 
         given: "Valid active collector number is provided"
         String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
@@ -40,22 +40,22 @@ class GetCashLockSpec extends BaseSpecification {
         createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
         and: "Expected Auth0 information for this collector is retrieved from the expected channel "
         String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.MOBILE.getValue()).accessToken
-        when: "update the customer preference to lock ( cash redeption: locked) "
+        when: "Update the customer preference to lock the cash redemption ( cash redemption: locked) "
         UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("true", accessToken)
-        and: "Response returns Http status 200 Ok"
+        and: "Cash redemption is locked and response returns Http status 200 Ok"
         response.getStatusCode() == HttpStatus.SC_OK
-        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        then: "Validate the update response that cash redemption is locked "
         CashLockValidator.validateTheStatusOfCashLockAfterUpdating(response, "true")
         def cashLockStatus = "true"
-        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from their account"
         GetCashLockResponse getCashLockResponse = getCashLockClient.getCashLock(accessToken)
-        and: "collector actual cash redemption status  matches expected cash redemption status "
+        and: "Collector actual cash redemption status  matches expected cash redemption status "
         CashLockValidator.validateTheStatusOfCashLock(getCashLockResponse, cashLockStatus)
 
 
     }
 
-    def "TC-2. When collector unlock their redemption from  mobile (cash redemption = false) then collector is  able to redeem points from their account ."() {
+    def "TC-2. When collector unlock their redemption from  mobile (cash redemption = false) then the collector is  able to redeem points from their account ."() {
 
         given: "Valid active collector number is provided"
         String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
@@ -63,14 +63,14 @@ class GetCashLockSpec extends BaseSpecification {
         createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
         and: "Expected Auth0 information for this collector is retrieved from the expected channel "
         String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.MOBILE.getValue()).accessToken
-        when: "update the customer preference to lock ( cash redeption: locked) "
+        when: "Update the customer preference to unlock cash redemption ( cash redemption: unlocked) "
         UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("false", accessToken)
-        and: "Response returns Http status 200 Ok"
+        and: "Cash redemption is unlocked and response returns Http status 200 Ok"
         response.getStatusCode() == HttpStatus.SC_OK
-        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        then: "Validate the update response that cash redemption is unlocked"
         CashLockValidator.validateTheStatusOfCashLockAfterUpdating(response, "false")
         def cashLockStatus = "false"
-        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        then: "Collector get the response that cash redemption is unlocked and collector is able to redeem airmiles point from their account"
         GetCashLockResponse getCashLockResponse = getCashLockClient.getCashLock(accessToken)
         and: "collector actual cash redemption status  matches expected cash redemption status "
         CashLockValidator.validateTheStatusOfCashLock(getCashLockResponse, cashLockStatus)
@@ -78,7 +78,7 @@ class GetCashLockSpec extends BaseSpecification {
 
     }
 
-    def "TC-3. When collector lock their redemption from  WEB (cash redemption = true) then collector is not able to redeem points from their account ."() {
+    def "TC-3. When collector lock their redemption from  WEB (cash redemption = true) then  collector is not able to redeem points from their account ."() {
 
         given: "Valid active collector number is provided"
         String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
@@ -86,16 +86,16 @@ class GetCashLockSpec extends BaseSpecification {
         createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
         and: "Expected Auth0 information for this collector is retrieved from the expected channel "
         String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
-        when: "update the customer preference to lock ( cash redeption: locked) "
+        when: "Update the customer preference to lock the cash redemption ( cash redemption: locked) "
         UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("true", accessToken)
-        and: "Response returns Http status 200 Ok"
+        and: "Cash redemption is locked and response returns Http status 200 Ok"
         response.getStatusCode() == HttpStatus.SC_OK
-        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        then: "Validate the update response that cash redemption is locked "
         CashLockValidator.validateTheStatusOfCashLockAfterUpdating(response, "true")
         def cashLockStatus = "true"
-        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from account"
         GetCashLockResponse getCashLockResponse = getCashLockClient.getCashLock(accessToken)
-        and: "collector actual cash redemption status  matches expected cash redemption status "
+        and: "Collector actual cash redemption status  matches expected cash redemption status "
         CashLockValidator.validateTheStatusOfCashLock(getCashLockResponse, cashLockStatus)
 
 
@@ -109,14 +109,14 @@ class GetCashLockSpec extends BaseSpecification {
         createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
         and: "Expected Auth0 information for this collector is retrieved from the expected channel "
         String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
-        when: "update the customer preference to lock ( cash redeption: locked) "
+        when: "Update the customer preference to unlock cash redemption ( cash redemption: unlocked)"
         UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("false", accessToken)
-        and: "Response returns Http status 200 Ok"
+        and: "Cash redemption is unlocked and response returns Http status 200 Ok"
         response.getStatusCode() == HttpStatus.SC_OK
-        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        then: "Validate the update response that cash redemption is unlocked"
         CashLockValidator.validateTheStatusOfCashLockAfterUpdating(response, "false")
         def cashLockStatus = "false"
-        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from their account"
         GetCashLockResponse getCashLockResponse = getCashLockClient.getCashLock(accessToken)
         and: "collector actual cash redemption status  matches expected cash redemption status "
         CashLockValidator.validateTheStatusOfCashLock(getCashLockResponse, cashLockStatus)
@@ -132,16 +132,16 @@ class GetCashLockSpec extends BaseSpecification {
         createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
         and: "Expected Auth0 information for this collector is retrieved from the expected channel "
         String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.CELO_GREEN.getValue()).accessToken
-        when: "update the customer preference to lock ( cash redeption: locked) "
+        when: "Update the customer preference to lock cash redemption ( cash redemption: locked) "
         UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("true", accessToken)
-        and: "Response returns Http status 200 Ok"
+        and: "Cash redemption is locked and response returns Http status 200 Ok"
         response.getStatusCode() == HttpStatus.SC_OK
-        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        then: "Validate the update response that cash redemption is locked"
         CashLockValidator.validateTheStatusOfCashLockAfterUpdating(response, "true")
         def cashLockStatus = "true"
-        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from their account"
         GetCashLockResponse getCashLockResponse = getCashLockClient.getCashLock(accessToken)
-        and: "collector actual cash redemption status  matches expected cash redemption status "
+        and: "Collector actual cash redemption status  matches expected cash redemption status "
         CashLockValidator.validateTheStatusOfCashLock(getCashLockResponse, cashLockStatus)
 
 
@@ -155,14 +155,14 @@ class GetCashLockSpec extends BaseSpecification {
         createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
         and: "Expected Auth0 information for this collector is retrieved from the expected channel "
         String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.CELO_GREEN.getValue()).accessToken
-        when: "update the customer preference to lock ( cash redeption: locked) "
+        when: "Update the customer preference to unlock cash redemption ( cash redemption: unlocked) "
         UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("false", accessToken)
-        and: "Response returns Http status 200 Ok"
+        and: "Cash redemption is unlocked and response returns Http status 200 Ok"
         response.getStatusCode() == HttpStatus.SC_OK
-        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        then: "Validate the update response that cash redemption is unlocked"
         CashLockValidator.validateTheStatusOfCashLockAfterUpdating(response, "false")
         def cashLockStatus = "false"
-        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from air"
+        then: "Collector get the response that cash redemption is locked and collector is not able to redeem airmiles point from their account"
         GetCashLockResponse getCashLockResponse = getCashLockClient.getCashLock(accessToken)
         and: "collector actual cash redemption status  matches expected cash redemption status "
         CashLockValidator.validateTheStatusOfCashLock(getCashLockResponse, cashLockStatus)

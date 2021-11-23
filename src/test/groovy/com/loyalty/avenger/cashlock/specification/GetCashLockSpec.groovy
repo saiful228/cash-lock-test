@@ -198,7 +198,7 @@ class GetCashLockSpec extends BaseSpecification {
     def "TC-8. When dormant collector unlock their redemption from  WEB (cash redemption = false) then collector is  able to redeem points from their account ."() {
 
         given: "Valid active collector number is provided"
-        String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
+        String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.DORMANT.getValue(), 100))
         and: "Expected current collector information is retrieved and create pin for that collector "
         createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
         and: "Expected Auth0 information for this collector is retrieved from the expected channel "

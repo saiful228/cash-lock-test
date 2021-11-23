@@ -3,6 +3,7 @@ package com.loyalty.avenger.cashlock.components.auth
 import com.loyalty.avenger.cashlock.components.util.TestDataUtils
 import groovy.json.JsonSlurper
 import org.apache.http.HttpResponse
+import org.apache.http.HttpStatus
 
 class AuthResponse {
     HttpResponse httpResponse
@@ -41,5 +42,6 @@ class AuthResponse {
         this.expiresIn = result.expires_in
         this.tokenType = result.token_type
     }
+
 
 }

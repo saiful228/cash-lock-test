@@ -1,6 +1,7 @@
 package com.loyalty.avenger.cashlock.specification
 
 import com.loyalty.avenger.cashlock.components.constant.Channels
+import com.loyalty.avenger.cashlock.components.constant.Constants
 import com.loyalty.avenger.cashlock.components.helper.CeloHelper
 import com.loyalty.avenger.cashlock.components.repository.CeloRepository
 import com.loyalty.avenger.cashlock.components.type.EmailVerifyTableType
@@ -59,9 +60,10 @@ class BaseSpecification extends Specification {
             }
         }
         catch (Exception e) {
-            Logger.logError("Error while cleaning up email::"+e.getMessage())
+            Logger.logError("Error while cleaning up email::" + e.getMessage())
         }
     }
+
     String createAuth0PinDBRecord(String newPin = TestDataUtils.getRandomStringNumber(4)) {
         createSecretPin(enrollMemberResponse.getResponseContext().cardNumber, newPin)
         String pinToken = getTokenClient.getAccessToken().getAccessToken()
@@ -85,15 +87,28 @@ class BaseSpecification extends Specification {
         request.context = contextType
         try {
             CreatePinResponse response = securityClient.createPin(request)
-            if( !response.ETSServiceVersion.equalsIgnoreCase("security-1.5.2-20120501")) {
+            if (!response.ETSServiceVersion.equalsIgnoreCase("security-1.5.2-20120501")) {
                 result = false
             }
         }
-        catch(Exception e) {
+        catch (Exception e) {
             result = false
         }
         Logger.logMessage("Card Number: $cardNumber, New Security Pin: ${secretPin}")
         Thread.sleep(40000)
         result
+    }
+
+    String getRandomVictimCollector(String securityPin = Constants.DEFAULT_SECRET_PIN) {
+        String cardNumber
+        for (int i = 0; i <= 20; i++) {
+            cardNumber = TestDataUtils.getRandomValueFromList(
+                    celoRepository.getRandomVictimCollectorsList())
+            if (createSecretPin(cardNumber, securityPin)) {
+                this.cardNumber = cardNumber
+                break
+            }
+        }
+
     }
 }

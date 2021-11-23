@@ -12,7 +12,6 @@ class UpdateCashLockResponse {
     HttpResponse httpResponse
     Integer statusCode
     String responseBody
-
     String timestamp
     String faultCode
     String message

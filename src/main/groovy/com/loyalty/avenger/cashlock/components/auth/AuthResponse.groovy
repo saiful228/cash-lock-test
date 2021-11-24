@@ -22,6 +22,7 @@ class AuthResponse {
                 tokenType: tokenType,
                 status: status
 
+
         ]
 
         TestDataUtils.mapToJson(bodyMap)

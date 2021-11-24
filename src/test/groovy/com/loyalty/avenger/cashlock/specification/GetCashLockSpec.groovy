@@ -1,7 +1,5 @@
 package com.loyalty.avenger.cashlock.specification
 
-import com.loyalty.avenger.cashlock.components.auth.AuthRequest
-import com.loyalty.avenger.cashlock.components.auth.AuthResponse
 import com.loyalty.avenger.cashlock.components.constant.Channels
 import com.loyalty.avenger.cashlock.components.constant.Constants
 import com.loyalty.avenger.cashlock.components.auth.GetTokenClient
@@ -11,8 +9,8 @@ import com.loyalty.avenger.cashlock.components.restclient.getcashlock.GetCashLoc
 import com.loyalty.avenger.cashlock.components.restclient.getcashlock.GetCashLockResponse
 import com.loyalty.avenger.cashlock.components.restclient.updatecashlock.UpdateCashLockClient
 import com.loyalty.avenger.cashlock.components.restclient.updatecashlock.UpdateCashLockResponse
-import com.loyalty.avenger.cashlock.components.util.Logger
 import com.loyalty.avenger.cashlock.components.util.TestDataUtils
+import com.loyalty.avenger.cashlock.components.validator.BaseValidator
 import com.loyalty.avenger.cashlock.components.validator.CashLockValidator
 import com.loyalty.ws.cpm.esb.amrp._2._1.member.wsdl.Member
 import org.apache.http.HttpStatus
@@ -172,6 +170,7 @@ class GetCashLockSpec extends BaseSpecification {
 
 
     }
+
     def "TC-7. When dormant collector lock their redemption from  WEB (cash redemption = true) then  collector is not able to redeem points from their account ."() {
 
         given: "Valid active collector number is provided"
@@ -218,6 +217,61 @@ class GetCashLockSpec extends BaseSpecification {
 
     }
 
+    def "TC-9. When Suspended collector  try to update their cash redemption from  WEB the collector is not able to access  their account and get Error 403 forbidden ."() {
 
+
+        given: "Valid Suspended collector number is provided"
+        String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.SUSPENDED.getValue(), 100))
+        and: "Expected current collector information is retrieved and create pin for that collector "
+        createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
+        when: "Collector is try to update cash redemption using the expected channel "
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
+        Integer statusCode = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).status
+        then: "Collector is not able to update cash redemption and get 403 forbidden"
+        BaseValidator.validateNumericValues(statusCode, HttpStatus.SC_FORBIDDEN, "Response Status")
+
+    }
+    def "TC-10. When Victim collector  try to update their cash redemption from  WEB the collector is not able to access  their account and get Error 403 forbidden ."() {
+
+
+        given: "Valid Suspended collector number is provided"
+        String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.VICTIM.getValue(), 100))
+        and: "Expected current collector information is retrieved and create pin for that collector "
+        createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
+        when: "Collector is try to update cash redemption using the expected channel "
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
+        Integer statusCode = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).status
+        then: "Collector is not able to update cash redemption and get 403 forbidden"
+        BaseValidator.validateNumericValues(statusCode, HttpStatus.SC_FORBIDDEN, "Response Status")
+
+    }
+    def "TC-11. When Closed collector  try to update their cash redemption from  WEB the collector is not able to access  their account and get Error 403 forbidden ."() {
+
+
+        given: "Valid Suspended collector number is provided"
+        String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.CLOSED.getValue(), 100))
+        and: "Expected current collector information is retrieved and create pin for that collector "
+        createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
+        when: "Collector is try to update cash redemption using the expected channel "
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
+        Integer statusCode = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).status
+        then: "Collector is not able to update cash redemption and get 403 forbidden"
+        BaseValidator.validateNumericValues(statusCode, HttpStatus.SC_FORBIDDEN, "Response Status")
+
+    }
+    def "TC-12. When Closed collector  try to update their cash redemption from  WEB the collector is not able to access  their account and get Error 403 forbidden ."() {
+
+
+        given: "Valid Suspended collector number is provided"
+        String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.CANCELLED.getValue(), 100))
+        and: "Expected current collector information is retrieved and create pin for that collector "
+        createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
+        when: "Collector is try to update cash redemption using the expected channel "
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
+        Integer statusCode = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).status
+        then: "Collector is not able to update cash redemption and get 403 forbidden"
+        BaseValidator.validateNumericValues(statusCode, HttpStatus.SC_FORBIDDEN, "Response Status")
+
+    }
 
 }

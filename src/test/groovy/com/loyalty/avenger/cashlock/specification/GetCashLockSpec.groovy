@@ -33,14 +33,14 @@ class GetCashLockSpec extends BaseSpecification {
     String accessToken
 
 
-    def "TC-1. When Active collector lock their redemption from  mobile channel=  (cash redemption = true )then the collector  is not able to redeem points from their account ."() {
+    def "TC-1. When Active collector lock their redemption from  web channel (cash redemption = true )then the collector  is not able to redeem points from their account ."() {
 
         given: "Valid active collector number is provided"
         String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
         and: "Expected current collector information is retrieved and create pin for that collector "
         createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
         and: "Expected Auth0 information for this collector is retrieved from the expected channel "
-        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.MOBILE.getValue()).accessToken
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
         when: "Update the customer preference to lock the cash redemption ( cash redemption: locked) "
         UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("true", accessToken)
         and: "Cash redemption is locked and response returns Http status 200 Ok"
@@ -56,14 +56,14 @@ class GetCashLockSpec extends BaseSpecification {
 
     }
 
-    def "TC-2. When Active  collector unlock their redemption from  mobile (cash redemption = false) then the collector is  able to redeem points from their account ."() {
+    def "TC-2. When Active  collector unlock their redemption from  web (cash redemption = false) then the collector is  able to redeem points from their account ."() {
 
         given: "Valid active collector number is provided"
         String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
         and: "Expected current collector information is retrieved and create pin for that collector "
         createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
         and: "Expected Auth0 information for this collector is retrieved from the expected channel "
-        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.MOBILE.getValue()).accessToken
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
         when: "Update the customer preference to unlock cash redemption ( cash redemption: unlocked) "
         UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("false", accessToken)
         and: "Cash redemption is unlocked and response returns Http status 200 Ok"
@@ -79,14 +79,14 @@ class GetCashLockSpec extends BaseSpecification {
 
     }
 
-    def "TC-3. When Active  collector lock their redemption from  WEB (cash redemption = true) then  collector is not able to redeem points from their account ."() {
+    def "TC-3. When Active  collector lock their redemption from  Mobile  (cash redemption = true) then  collector is not able to redeem points from their account ."() {
 
         given: "Valid active collector number is provided"
         String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
         and: "Expected current collector information is retrieved and create pin for that collector "
         createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
         and: "Expected Auth0 information for this collector is retrieved from the expected channel "
-        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.MOBILE.getValue()).accessToken
         when: "Update the customer preference to lock the cash redemption ( cash redemption: locked) "
         UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("true", accessToken)
         and: "Cash redemption is locked and response returns Http status 200 Ok"
@@ -102,14 +102,14 @@ class GetCashLockSpec extends BaseSpecification {
 
     }
 
-    def "TC-4. When Active  collector unlock their redemption from  WEB (cash redemption = false) then collector is  able to redeem points from their account ."() {
+    def "TC-4. When Active  collector unlock their redemption from  Mobile  (cash redemption = false) then collector is  able to redeem points from their account ."() {
 
         given: "Valid active collector number is provided"
         String cardNumber = TestDataUtils.getRandomValueFromList(repository.getRandomCollectorsListByStatusRelaxed(MembershipStatus.ACTIVE.getValue(), 100))
         and: "Expected current collector information is retrieved and create pin for that collector "
         createSecretPin(cardNumber, Constants.DEFAULT_SECRET_PIN)
         and: "Expected Auth0 information for this collector is retrieved from the expected channel "
-        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.WEB.getValue()).accessToken
+        String accessToken = getTokenClient.getAccessToken(cardNumber, Constants.DEFAULT_SECRET_PIN, Channels.MOBILE.getValue()).accessToken
         when: "Update the customer preference to unlock cash redemption ( cash redemption: unlocked)"
         UpdateCashLockResponse response = updateCashLockClient.sendUpdateCashLockRequest("false", accessToken)
         and: "Cash redemption is unlocked and response returns Http status 200 Ok"

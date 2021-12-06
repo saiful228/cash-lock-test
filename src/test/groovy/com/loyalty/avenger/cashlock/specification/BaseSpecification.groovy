@@ -23,7 +23,7 @@ import spock.lang.Shared
 import spock.lang.Specification
 
 
-@ActiveProfiles("int")
+@ActiveProfiles("uat")
 @SpringBootTest(classes = com.loyalty.avenger.cashlock.components.TestApplication)
 class BaseSpecification extends Specification {
 

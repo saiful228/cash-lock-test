@@ -9,8 +9,7 @@ class DecryptString extends Specification{
     def "Decrypt String" () {
         setup: "Decrypt String"
 
-        String myString = "NSno96Hv1uJ0fwj/4/nNzsxLzhW4TmAY+PyoL7rO13RImeMIQtbW0wQsXVu0oV0DZD4DSMdfoRkhMFtmiFh6mVXDqWtobvaf6+9hB4KwAjpBFvbCoRquF/ztlwpa4xGE1YMGm0pw2LIQJAq4HUsAmTr+imK7Layuz6thY4e3Ilo0SWiwn3qJzwkihOdZhNLnsn1tfVqLBsCwEIPlS80inVxky7wbTV5WzsXOYj9D4lEbxUwrikFMzL0oNYi7skaWdv3oRmbTu+R4PzNEdtLeJNkCOX2NfVvp8dwAvb+MGdr+48wCiDTLDZnhefZeiNi8SjseaB5BQlHrtY7aZmlzbA=="
-
+        String myString = "DcrTDRHAhjJmEZA2q0TlSM2/mJwnbxEv5WJ2TLXQ1mkZiEfW7nRC3xyATH/oBU6ja1DtDKeS4uFOyALxShIWtG37D5IyzpC4bFOadf5mBm/0ETffu1wc2/nFWImG9uKKLDKrnUsNvZ5gpj4dKwgYUwyqGXPVBf6aBdRpth6CA+IVLN7itxQyspHRTp+saw5QPzLwfcPAz0zD2bCBEJTrGHNdOq+UqnlSeNn5Xgol8t8M1wop/cQDTk1cnEMA0qsjMONW0hG1BV9zMeUv2SCiTrK7OEtSyOFHOjiu5pc0wQGZvGsKEESPqAesxAifdxyO1V0upRAj5nNf78pxbi8lVg=="
         Logger.logMessage("Decrypted String: " + Encryptor.decrypt(myString))
         expect: "Done"
         true

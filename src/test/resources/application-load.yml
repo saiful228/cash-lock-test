@@ -31,25 +31,25 @@ loyalty:
   private_certificate: private_key.der
 
   auth-api:
-    uri: https://oauth-int.airmiles.ca/oauth/token
-    client_id: fcFBHZVViMCEnb74yzsQaMdtRZOXdAWYTRY6gFYLFyx+eXD3OF+cVgUQF0L4o4d77ZE21re/E2O/Nqtq71IChG7FOwCTif3X8mXJdBCtwgB5BcHzJGiFR/uilJeL+2QiIVabmgXL83QBTemUP1bOyoZ9vvcwJN6+kZMJVF/YoxrNd2rfBQK0qNY1LT5w/c15eej2Fgc1rOEqRfAVS8xJbn5pzyN+RtYKsje8tT5xwpfGaLh8ktwNZlY2/PF/4uZ+YwBCxdgyliDfDqQq+jUPJ8wSrs5wq29g1lD1HMn4pmnD+QqetPPCgMvAY8D5AK5JBNEJARnfjCL8KFeuzwmddg==
-    client_secret: kFc8rkv1hJMYM/pgwGvImSsf8XtuvQwSl7pg79sg22R78D1T04Nb+UziGXbw9GBfm0O7y2sZt/BMxvq8ClJmzBvJAaJ9CtugPCCViRkl32ZMMY51tOspK4YvefGpbzNYqRVsENfkMZ5XsXQRVwxarX8eFSY6fj7GbljytjmzlWhhFVegR7U2WMEbFRdYbIWWSiPwgcQMpmtQIiZKC1yCNd/fTuj34f+Jsz9pkeUY5CoizV3LY5NoejVWVMGa+X66/qsvzm1bMdpxXXCOOT0LBq3brZ6Rk1/jxH0LvoMhvHU2zpUpzVzZ65nWZPEdOIKURi4waWrQw5cvQKXQGcRIQQ==
+    uri: https://oauth-load.airmiles.ca/oauth/token
+    client_id: Idte1DKbFZ6e98uKj6KdAcWsShfBz6kNLnfNAv/mEg+YLoIYRQpEVMZsczOWIoxGiRuhA+MfwuCCBm0Al2/FuSeQ1DVXIuz6JzLKojBwaEgx9VYX4yBmmQlbOqFEK6G4NK8CRKGlae3z3op0GJ7xeilnnl1JKhH/BOqm7PmO6D2ynUxLHlQmKBS6icw2FX2dA0U2vTLEkRadsNJxHfoKQc25T9nmJNK6hB7FeLLLKXkGmKKMzBtFhD6/UgXXZ6a9W3IRAbwA9X5KRbWeyJbaL2KdxDV687EOkipRQfPygrUCx6LgLxLCoLrowODlbscZUY5TyBL3xBBJkO05BtCuFg==
+    client_secret: kdxxjUGBvQfux5K+XYozaMbZyfGrydiSOOH7D6lbUyJgCV6EiHLrIIjGMOTpWKqTp6c0ntYI/TPZRisNZyzmJa0WNcGUZtWKcFcpUsb8k82y6+54TKla77F02Aw7a+lxDtKW/IhARa1PxETp2bTUXoJpW5IZuShQji2vslFXSCEs4v75an0+/Mkb7rUoZPHGCPhqIGtumNAyx1M13Klf5hgQA4qUh4sKcYhl0hVayDc3Mq7vnm8Fr8P+3crtD4PFlmUCAtgATqOw2MGbJ6XYnQtGg2DaMgnucFlrOgCPY/H41E6CTuS73vtSBIAoUXhx1skBYWq8fbQLqVxdTqNOCA==
     audience: "https://members.loyalty.com"
     grant_type: "password"
 
   cashlock-api:
-    uri: https://int.airmilesapis.ca
+    uri: https://load.airmilesapis.ca
     path: /member-preference/cash-lock
     put_request: /member-preference/cash-lock
 
   celo-member-soap:
     protocol: https
-    host: int2.celo.app.loyalty.com
+    host: load4.celo.app.loyalty.com
     path: /CPM/MemberService_AMRP
 
   security-service-soap:
     protocol: http
-    host:  www.int-test.two.ets.app.loyalty.com     #www.int-test.two.ets.app.loyalty.com
+    host: www.load.four.ets.app.loyalty.com     #www.int-test.two.ets.app.loyalty.com
     path: /security/services/SecurityService?wsdl
 
 

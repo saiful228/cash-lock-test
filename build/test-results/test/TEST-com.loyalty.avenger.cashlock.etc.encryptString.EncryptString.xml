@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.loyalty.avenger.cashlock.etc.encryptString.EncryptString" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-06T23:18:15" hostname="CAN-JLC-ASML7H" time="0.269">
+  <properties/>
+  <testcase name="Encrypt String" classname="com.loyalty.avenger.cashlock.etc.encryptString.EncryptString" time="0.269"/>
+  <system-out><![CDATA[18:18:15.991 [Test worker] INFO com.loyalty.avenger.cashlock.components.util.Logger - 
+
+[TEST AUTOMATION]
+Encrypted String: kdxxjUGBvQfux5K+XYozaMbZyfGrydiSOOH7D6lbUyJgCV6EiHLrIIjGMOTpWKqTp6c0ntYI/TPZRisNZyzmJa0WNcGUZtWKcFcpUsb8k82y6+54TKla77F02Aw7a+lxDtKW/IhARa1PxETp2bTUXoJpW5IZuShQji2vslFXSCEs4v75an0+/Mkb7rUoZPHGCPhqIGtumNAyx1M13Klf5hgQA4qUh4sKcYhl0hVayDc3Mq7vnm8Fr8P+3crtD4PFlmUCAtgATqOw2MGbJ6XYnQtGg2DaMgnucFlrOgCPY/H41E6CTuS73vtSBIAoUXhx1skBYWq8fbQLqVxdTqNOCA==
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
